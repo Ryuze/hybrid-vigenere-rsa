@@ -1,4 +1,5 @@
 from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
 def generateKey():
     key = RSA.generate(1024)
@@ -9,3 +10,18 @@ def generateKey():
     p = open('key/pub.pem', 'wb')
     p.write(key.publickey().exportKey())
     p.close()
+    
+def encrypt(plaintext):
+    message = plaintext.encode('utf-8')
+    key = RSA.importKey(open('key/pub.pem').read())
+    cipher = PKCS1_OAEP.new(key)
+    ciphertext = cipher.encrypt(message)
+    
+    return ciphertext
+
+def decrypt(ciphertext):
+    key = RSA.importKey(open('key/priv.pem').read())
+    cipher = PKCS1_OAEP.new(key)
+    plaintext = cipher.decrypt(ciphertext).decode()
+    
+    return plaintext

@@ -1,9 +1,0 @@
-import random
-
-number_list = [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
-random.Random('asdqwe').shuffle(number_list)
-print(number_list)
-
-
-/*idenya bikin per huruf di key jadi seed buat acak posisi dipasangnya key di table*/
-number_list.insert(random.Random('a').randint(0, len(number_list)), 'key_per_huruf_disini')
