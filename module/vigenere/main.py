@@ -3,7 +3,7 @@ import secrets
 from ordered_set import OrderedSet
 
 def __originalTable():
-    table = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+    table = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
     
     return table
     
@@ -34,7 +34,7 @@ def encrypt(plaintext, initial_key):
     cipher = []
     
     for index in range(len(plaintext)):
-        calculate = (table.index(plaintext[index]) + table.index(key[index])) % 94
+        calculate = (table.index(plaintext[index]) + table.index(key[index])) % 95
         cipher.append(table[calculate])
     
     return ''.join(cipher)
@@ -45,7 +45,7 @@ def decrypt(ciphertext, initial_key):
     plain = []
 
     for index in range(len(ciphertext)):
-        calculate = (table.index(ciphertext[index]) - table.index(key[index])) % 94
+        calculate = (table.index(ciphertext[index]) - table.index(key[index])) % 95
         plain.append(table[calculate])
     
     return ''.join(plain)
