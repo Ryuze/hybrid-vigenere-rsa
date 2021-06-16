@@ -15,14 +15,11 @@ def scrambleTable(key):
     return table
 
 def generateUniqueKey():
-    table = __originalTable()
     unique_key = secrets.token_urlsafe()
     
     return unique_key
 
-def stretchKey(initialKey, plaintextLength):
-    table = __originalTable()
-    
+def stretchKey(table, initialKey, plaintextLength):    
     random.seed(initialKey)
     key = random.choices(table, k=plaintextLength)
     
@@ -30,7 +27,7 @@ def stretchKey(initialKey, plaintextLength):
 
 def encrypt(plaintext, initial_key):
     table = scrambleTable(initial_key)
-    key = stretchKey(initial_key, len(plaintext))
+    key = stretchKey(table, initial_key, len(plaintext))
     cipher = []
     
     for index in range(len(plaintext)):
@@ -41,7 +38,7 @@ def encrypt(plaintext, initial_key):
 
 def decrypt(ciphertext, initial_key):
     table = scrambleTable(initial_key)
-    key = stretchKey(initial_key, len(ciphertext))
+    key = stretchKey(table, initial_key, len(ciphertext))
     plain = []
 
     for index in range(len(ciphertext)):
@@ -49,3 +46,20 @@ def decrypt(ciphertext, initial_key):
         plain.append(table[calculate])
     
     return ''.join(plain)
+
+if __name__ == "__main__":
+    plaintext = "In cryptography, encryption is the process of encoding information. This process converts the original representation of the information, known as plaintext, into an alternative form known as ciphertext. Ideally, only authorized parties can decipher a ciphertext back to plaintext and access the original information."
+    token = 'sxOrtLSsHauQcF7pQMNYalIDCC27Uparg_4QLUv6j9w'
+    tabel = scrambleTable(token)
+    primaryKey = ''.join(stretchKey(tabel, token, len(plaintext)))
+    # secondaryKey = ''.join(fakeStretchKey(token, len(plaintext)))
+    enc = encrypt(plaintext, token)
+    
+    print(f'Token yang digunakan: {token}')
+    print()
+    print(f"""Hasil enkripsi:
+{enc}""")
+    print()
+#     print(f"""Key dengan tabel tidak diacak:
+# {secondaryKey}""")
+    # print(f'Tabel: {tabel}')
