@@ -26,12 +26,3 @@ def decrypt(ciphertext):
     plaintext = cipher.decrypt(ciphertext).decode()
     
     return plaintext
-
-if __name__ == '__main__':
-    plaintext = "sxOrtLSsHauQcF7pQMNYalIDCC27Uparg_4QLUv6j9w"
-    
-    print('token yang digunakan: ' + plaintext + '\n')
-    for i in range(1, 5):
-        enc = encrypt(plaintext)
-        print(str(binascii.hexlify(enc)) + '\n')
-        
